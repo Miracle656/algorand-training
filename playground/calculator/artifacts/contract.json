@@ -1,0 +1,77 @@
+{
+    "name": "Calculator",
+    "methods": [
+        {
+            "name": "add",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a"
+                },
+                {
+                    "type": "uint64",
+                    "name": "b"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            }
+        },
+        {
+            "name": "subtract",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a"
+                },
+                {
+                    "type": "uint64",
+                    "name": "b"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            }
+        },
+        {
+            "name": "product",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a"
+                },
+                {
+                    "type": "uint64",
+                    "name": "b"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            }
+        },
+        {
+            "name": "divide",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a"
+                },
+                {
+                    "type": "uint64",
+                    "name": "b"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            }
+        },
+        {
+            "name": "read_result",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            }
+        }
+    ],
+    "networks": {}
+}

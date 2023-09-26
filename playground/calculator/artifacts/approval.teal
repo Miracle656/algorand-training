@@ -1,0 +1,271 @@
+#pragma version 8
+intcblock 0 1
+bytecblock 0x726573756c74 0x151f7c75
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l12
+txna ApplicationArgs 0
+pushbytes 0xfe6bdf69 // "add(uint64,uint64)uint64"
+==
+bnz main_l11
+txna ApplicationArgs 0
+pushbytes 0x49776b70 // "subtract(uint64,uint64)uint64"
+==
+bnz main_l10
+txna ApplicationArgs 0
+pushbytes 0x2b5299b0 // "product(uint64,uint64)uint64"
+==
+bnz main_l9
+txna ApplicationArgs 0
+pushbytes 0x3862b1a3 // "divide(uint64,uint64)uint64"
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0xc2f25066 // "read_result()uint64"
+==
+bnz main_l7
+err
+main_l7:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub readresultcaster_9
+intc_1 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub dividecaster_8
+intc_1 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub productcaster_7
+intc_1 // 1
+return
+main_l10:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub subtractcaster_6
+intc_1 // 1
+return
+main_l11:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub addcaster_5
+intc_1 // 1
+return
+main_l12:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l14
+err
+main_l14:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+intc_1 // 1
+return
+
+// add
+add_0:
+proto 2 1
+intc_0 // 0
+bytec_0 // "result"
+frame_dig -2
+frame_dig -1
++
+app_global_put
+frame_dig -2
+frame_dig -1
++
+frame_bury 0
+retsub
+
+// subtract
+subtract_1:
+proto 2 1
+intc_0 // 0
+bytec_0 // "result"
+frame_dig -2
+frame_dig -1
+-
+app_global_put
+frame_dig -2
+frame_dig -1
+-
+frame_bury 0
+retsub
+
+// product
+product_2:
+proto 2 1
+intc_0 // 0
+bytec_0 // "result"
+frame_dig -2
+frame_dig -1
+*
+app_global_put
+frame_dig -2
+frame_dig -1
+*
+frame_bury 0
+retsub
+
+// divide
+divide_3:
+proto 2 1
+intc_0 // 0
+bytec_0 // "result"
+frame_dig -2
+frame_dig -1
+/
+app_global_put
+frame_dig -2
+frame_dig -1
+/
+frame_bury 0
+retsub
+
+// read_result
+readresult_4:
+proto 0 1
+intc_0 // 0
+bytec_0 // "result"
+app_global_get
+frame_bury 0
+retsub
+
+// add_caster
+addcaster_5:
+proto 0 0
+intc_0 // 0
+dupn 2
+txna ApplicationArgs 1
+btoi
+frame_bury 1
+txna ApplicationArgs 2
+btoi
+frame_bury 2
+frame_dig 1
+frame_dig 2
+callsub add_0
+frame_bury 0
+bytec_1 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// subtract_caster
+subtractcaster_6:
+proto 0 0
+intc_0 // 0
+dupn 2
+txna ApplicationArgs 1
+btoi
+frame_bury 1
+txna ApplicationArgs 2
+btoi
+frame_bury 2
+frame_dig 1
+frame_dig 2
+callsub subtract_1
+frame_bury 0
+bytec_1 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// product_caster
+productcaster_7:
+proto 0 0
+intc_0 // 0
+dupn 2
+txna ApplicationArgs 1
+btoi
+frame_bury 1
+txna ApplicationArgs 2
+btoi
+frame_bury 2
+frame_dig 1
+frame_dig 2
+callsub product_2
+frame_bury 0
+bytec_1 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// divide_caster
+dividecaster_8:
+proto 0 0
+intc_0 // 0
+dupn 2
+txna ApplicationArgs 1
+btoi
+frame_bury 1
+txna ApplicationArgs 2
+btoi
+frame_bury 2
+frame_dig 1
+frame_dig 2
+callsub divide_3
+frame_bury 0
+bytec_1 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// read_result_caster
+readresultcaster_9:
+proto 0 0
+intc_0 // 0
+callsub readresult_4
+frame_bury 0
+bytec_1 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub

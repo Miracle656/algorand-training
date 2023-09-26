@@ -31,7 +31,7 @@ def demo() -> None:
     )
 
     # Call the `hello` method
-    call_response = app_client.call(helloworld.hello, name="Beaker")
+    call_response = app_client.call(helloworld.hello, name="Miracle")
     print(call_response.return_value)  # "Hello, Beaker"
 
 
