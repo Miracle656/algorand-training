@@ -6,6 +6,13 @@ See below for default getting started instructions.
 
 # Setup
 
+## How to run the smart contract
+1. Visit https://app.dappflow.org/abi-studio/abis
+2. Switch from mainnet to testnet and generate and fund a dev wallet
+3. Now import the abi file by clicking import
+4. Navigate to either the "hello world" or "calculator" folder and find thier abi files and you're good to go
+5. test the smart contract and have fun
+
 ## Quick start
 
 1. Ensure you have AlgoKit installed and run `algokit bootstrap all` in this directory
